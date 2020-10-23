@@ -50,13 +50,14 @@
             <p id="humidity"></p>
         </div>
     </div>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script type="text/javascript">
-        var weather = [];
+        var weathers = [];
         var selectedWeather
         function buttonPressed(){
             var city = document.getElementById("cityInput").value
@@ -86,11 +87,11 @@
                 td3.innerHTML = (weathers[i]["temp"]["day"] -273.15).toFixed(1) +" &deg;C"
                 // innerHTML for td4
                 var weatherImg = document.createElement("img")
-                var weatherUrl = "https://openweathermap.org/img/wn/04d@2x.png"+weathers[i]["weather"][0]["icon"]+"@2x.png"
+                var weatherUrl = "https://openweathermap.org/img/wn/"+weathers[i]["weather"][0]["icon"]+"@2x.png"
                 weatherImg.setAttribute("src", weatherUrl)
                 td4.appendChild(weatherImg)
                 // innerHTML for td5
-                td5.innerHTML = "first column row "+i  
+                td5.innerHTML = "fifth column row "+i  
 
                 // append td1 to tr
                 newTr.appendChild(td1)
@@ -104,15 +105,15 @@
                 newTr.appendChild(td5)
 
                 newTr.weather = weathers[i]
-                newTr.addEventListerner('click', function(evt){
-                    selectedWeather = evt.currentTarget.index
+                newTr.addEventListener('click', function(evt){
+                    selectedWeather = evt.currentTarget.weather
                     document.getElementById("weatherImage").setAttribute("src","https://openweathermap.org/img/wn/"+
                         selectedWeather["weather"][0]["icon"]+"@2x.png")
-                    document.getElementById("date").innerHTML = new Date(selectedWeather)["dt"]*1000)
-                document.getElementById("temp").innerHTML = (selectedWeather["temp"]["day"] -273.15).toFixed(1) +" &deg;C"
-                document.getElementById("weather").innerHTML = selectedWeather["weather"][0]["main"]
-                document.getElementById("pressure").innerHTML = selectedWeather["pressure"]
-                document.getElementById("humidity").innerHTML = selectedWeather["humidity"]
+                    document.getElementById("date").innerHTML = new Date(selectedWeather)["dt"]*1000
+                    document.getElementById("temp").innerHTML = (selectedWeather["temp"]["day"] -273.15).toFixed(1) +" &deg;C"
+                    document.getElementById("weather").innerHTML = selectedWeather["weather"][0]["main"]
+                    document.getElementById("pressure").innerHTML = selectedWeather["pressure"]
+                    document.getElementById("humidity").innerHTML = selectedWeather["humidity"]
 
             })
                 // append tr to tbody
@@ -125,11 +126,11 @@
             })
 
         }
+
         function formatDateTime(){
             
         }
-
-</script>
+    </script>
     <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
